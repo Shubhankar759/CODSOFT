@@ -41,7 +41,9 @@ while True:
     
     #Items are removed in list from here 
       elif choose=='2':
-        print(*[item for item in To_Do_List],sep='')
+        print("\n")
+        print(*[item for item in To_Do_List],sep='\n')
+        print("\n")
         num = input("Enter item No. to be removed:")
         num = int(num)
         To_Do_List.pop(num)
@@ -56,7 +58,9 @@ while True:
     
     #List can be displayed from here  
       elif choose=='4':
+        print("\n")
         print(*[item for item in To_Do_List],sep='\n')
+        print("\n")
     
     #Items can be checked from here
       elif choose=='5':
