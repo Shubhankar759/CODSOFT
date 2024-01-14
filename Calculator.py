@@ -1,58 +1,79 @@
+#importing GUI library 
 from tkinter import *
 
-
-
-a=0
-b=0
-operation=0
+#Function to typecast String input into integer or float
 def Casting(x):
     if x.find(".")==-1:
         return int(x)
     else:
         return float(x)
 
+#All Function for button to input value of operand
 def MainDashOne():
-    Numbers.insert(0,'1')
+    Numbers.insert(len(Numbers.get()),'1')
     
 def MainDashTwo():
-    Numbers.insert(0,'2')
+    Numbers.insert(len(Numbers.get()),'2')
 
 def MainDashThree():
-    Numbers.insert(0,'3')
+    Numbers.insert(len(Numbers.get()),'3')
     
 def MainDashFour():
-    Numbers.insert(0,'4')
+    Numbers.insert(len(Numbers.get()),'4')
     
 def MainDashFive():
-    Numbers.insert(0,'5')
+    Numbers.insert(len(Numbers.get()),'5')
     
 def MainDashSix():
-    Numbers.insert(0,'6')
+    Numbers.insert(len(Numbers.get()),'6')
     
 def MainDashSeven():
-    Numbers.insert(0,'7')
+    Numbers.insert(len(Numbers.get()),'7')
     
 def MainDashEighth():
-    Numbers.insert(0,'8')
+    Numbers.insert(len(Numbers.get()),'8')
     
 def MainDashNine():
-    Numbers.insert(0,'9')
+    Numbers.insert(len(Numbers.get()),'9')
     
 def MainDashZero():
-    Numbers.insert(0,'0')
+    Numbers.insert(len(Numbers.get()),'0')
     
 def MainDashPoint():
-    Numbers.insert(0,'.')
+    Numbers.insert(len(Numbers.get()),'.')
 
+#Function to clear numbers on the display
 def Clear():
     Numbers.delete(0,END)
-    
+
+#All Function for button to perform operation   
 def Add():
     global a
     a=Casting(Numbers.get())
     Clear()
     global operation
     operation=1
+
+def Minus():
+    global a
+    a=Casting(Numbers.get())
+    Clear()
+    global operation
+    operation=2
+    
+def Multiple():
+    global a
+    a=Casting(Numbers.get())
+    Clear()
+    global operation
+    operation=3
+
+def Divide():
+    global a
+    a=Casting(Numbers.get())
+    Clear()
+    global operation
+    operation=4
     
 def Answer():
     b=Numbers.get()
@@ -60,9 +81,15 @@ def Answer():
     Clear()
     if operation==1:
         Numbers.insert(0,str(a+b))
+    elif operation==2:
+        Numbers.insert(0,str(a-b))
+    elif operation==3:
+        Numbers.insert(0,str(a*b))
+    elif operation ==4:
+        Numbers.insert(0,str(a/b))
    
     
-
+#styling of GUI window
 window =Tk()
 window.geometry("300x400")
 window.title('Calculator in Python')
@@ -70,9 +97,11 @@ icon = PhotoImage(file='CalSigns.png')
 window.iconphoto(True,icon)
 window.config(background='black')
 
-Numbers = Entry(window,font=('Arial',38),width=7,justify=RIGHT)
+#Main Input display of calculator
+Numbers = Entry(window,font=('Arial',38),width=7,justify=RIGHT,bg='black',fg='lightgreen')
 Numbers.place(x=10,y=10)
 
+#all button of calculator 
 PressOne=Button(window,
                 text='1',
                 height= 3, width=6
@@ -161,21 +190,21 @@ PressPlus.place(x=220,y=80)
 PressMinus=Button(window,
                 text='-',
                 height= 3, width=6
-                ,activeforeground='lightgreen',activebackground='black',background='lightgreen',
+                ,activeforeground='lightgreen',activebackground='black',background='lightgreen',command=Minus,
                 font=('Arial',13))
 PressMinus.place(x=220,y=160)
 
 PressMultiple=Button(window,
                 text='×',
                 height= 3, width=6
-                ,activeforeground='lightgreen',activebackground='black',background='lightgreen',
+                ,activeforeground='lightgreen',activebackground='black',background='lightgreen',command=Multiple,
                 font=('Arial',13))
 PressMultiple.place(x=220,y=240)
 
 PressDivide=Button(window,
                 text='÷',
                 height= 3, width=6
-                ,activeforeground='lightgreen',activebackground='black',background='lightgreen',
+                ,activeforeground='lightgreen',activebackground='black',background='lightgreen',command=Divide,
                 font=('Arial',13))
 PressDivide.place(x=220,y=320)
 
