@@ -26,8 +26,7 @@ def submit():
 
   password="".join(random.sample(mark,words))
   Display.insert(0,password)
-  print(password)
-
+  
 #window styling   
 window = Tk()
 window.title("Python Password Generator")
