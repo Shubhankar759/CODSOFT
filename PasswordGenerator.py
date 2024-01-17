@@ -1,9 +1,38 @@
 from tkinter import *
 import random
 
+def submit():
+  Display.delete(0, END)
+  words=WordCount.get()
+  uppercase="QWERTYUIOPASDFGHJKLZXCVBNM"
+  lowercase="qwertyuiopasdfghjklzxcvbnm"
+  numb='1234567890'
+  spe="}]!@#%$^&*()~`,./<>?:;_-+=*|[{\"\'\\"
+  mark=''
+  
+  if num.get():
+    mark +=numb
+    
+  if ustr.get():
+    mark+=uppercase
+  
+  if lstr.get():
+    mark+=lowercase
+  
+  if spech.get():
+    mark+=spe
+
+  password="".join(random.sample(mark,words))
+  Display.insert(0,password)
+  print(password)
+  
+  
+  
+  
+
 window = Tk()
 window.title("Python Password Generator")
-window.geometry("400x340")
+window.geometry("400x370")
 window.config(background='#262626')
 
 def copy_to_clip():
@@ -15,7 +44,7 @@ def copy_to_clip():
 num=BooleanVar()
 lstr=BooleanVar()
 ustr=BooleanVar()
-spe=BooleanVar()
+spech=BooleanVar()
 
 heading = Label(window,
                 text="Password Generator",
@@ -72,7 +101,7 @@ Lstr.place(x=7,y=143)
 
 Special = Checkbutton(window,
                   text='Special charaters',
-                  variable=spe,
+                  variable=spech,
                   font=("Arial",10),
                   fg='#4da6ff',
                   bg='#262626',
@@ -101,12 +130,28 @@ WordCount= Scale(window,
 
 WordCount.place(x=5,y=235)
 
-Display = Entry(window,
-                font=("Arial",12),
-                width=33,
-                bg='#262626')
+WordCount.set(8)
 
-Display.place(x=10,y=290)
+Submit = Button(window,text='Generate',
+                font=("Arial",10),
+                    height=1,
+                    width=7,
+                    fg='#4da6ff',
+                    bg='#262626',
+                  activeforeground='#ff884d',
+                  activebackground='#262626',
+                  command=submit
+                  )
+
+Submit.place(x=170,y=287)
+
+Display = Entry(window,
+                font=("Arial",13),
+                width=33,
+               fg='black',
+               bg='#b3b3b3')
+
+Display.place(x=10,y=325)
 
 CopyButton = Button(window,text='Copy',
                     font=("Arial",10),
@@ -118,7 +163,7 @@ CopyButton = Button(window,text='Copy',
                   activebackground='#262626',
                    command=copy_to_clip)
 
-CopyButton.place(x=325,y=288)
+CopyButton.place(x=325,y=324)
 
 
 
