@@ -4,7 +4,7 @@ pygame.init()
 screen = pygame.display.set_mode((400,500))
 pygame.display.set_caption("Rock Paper Scissors")
 
-x=0
+round=0
 
 font = pygame.font.SysFont('Roboto',40,bold=True)
 Quit = font.render('Quit',True,'white')
@@ -14,7 +14,12 @@ Round_2 = font.render('10 Rounds',True,'white')
 Round_3 = font.render('15 Rounds',True,'white')
 Round_4 = font.render('20 Rounds',True,'white')
 
-
+Rock = pygame.image.load('Rock.png')
+Rock = pygame.transform.scale(Rock,(100,100))
+Paper = pygame.image.load('Paper.png')
+Paper = pygame.transform.scale(Paper,(100,100))
+Scissors = pygame.image.load('Scissors.png')
+Scissors = pygame.transform.scale(Scissors,(100,100))
 
 
 Quit_button =  pygame.Rect(250,350,68,30)
@@ -23,12 +28,13 @@ Round_button_1 = pygame.Rect(135,150,130,30)
 Round_button_2 = pygame.Rect(130,200,140,30)
 Round_button_3 = pygame.Rect(130,250,140,30)
 Round_button_4 = pygame.Rect(130,300,140,30)
+Rock_button = pygame.Rect(130,300,200,200)
 
 
 run =True
 Menu_state=True
 Rounds_state=False
-
+Game_state=False
 
 def Start_menu():
      pygame.draw.rect(screen,('black'),Quit_button)
@@ -40,7 +46,7 @@ def Start_menu():
 
 def Round_menu():
     
-     test = font.render(f"{x} rounds",True,"white")
+     text_1 = font.render("Choose number of rounds",True,"white")
      pygame.draw.rect(screen,('black'),Round_button_1)
      screen.blit(Round_1,(Round_button_1.x,Round_button_1.y))
      
@@ -53,17 +59,23 @@ def Round_menu():
      pygame.draw.rect(screen,('black'),Round_button_4)
      screen.blit(Round_4,(Round_button_4.x,Round_button_4.y))
      
-     screen.blit(test,(10,10))
-    
+     screen.blit(text_1,(20,50))
+     
+def Game():
+    pygame.draw.rect(screen,('black'),Rock_button)
+    screen.blit(Rock,(Rock_button.x,Rock_button.y))
+   
  
 while run:
     
-    screen.fill("purple")
+    screen.fill("red")
     
     if Menu_state:    
          Start_menu()
     if Rounds_state:
         Round_menu()
+    if Game_state:
+        Game()
         
     for events in pygame.event.get():
         if events.type == pygame.QUIT:
@@ -71,14 +83,31 @@ while run:
         if events.type == pygame.MOUSEBUTTONDOWN:
             if  Quit_button.collidepoint(events.pos):
                 run= False 
-            
+                
             if Start_button.collidepoint(events.pos):
                Menu_state=False
                Rounds_state=True
                
             if Round_button_1.collidepoint(events.pos):
-                x+=1 
+                round=5
+                Rounds_state=False
+                Game_state=True
                 
+            if Round_button_2.collidepoint(events.pos):
+                round=10
+                Rounds_state=False
+                Game_state=True
+                
+            if Round_button_3.collidepoint(events.pos):
+                round=15
+                Rounds_state=False
+                Game_state=True
+                
+            if Round_button_4.collidepoint(events.pos):
+                round=20
+                Rounds_state=False
+                Game_state=True
+          
     
 
 
