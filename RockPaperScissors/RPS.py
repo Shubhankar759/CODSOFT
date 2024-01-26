@@ -1,4 +1,5 @@
 import pygame
+import random
 
 pygame.init()
 screen = pygame.display.set_mode((400,500))
@@ -7,9 +8,13 @@ pygame.display.set_caption("Rock Paper Scissors")
 
 count_round=1
 choice=0
+score_your=0
+score_comp=0
+result=0
 
 font = pygame.font.SysFont('Roboto',40,bold=True)
 font_1=pygame.font.SysFont('Roboto',25,bold=True)
+
 Quit = font.render('Quit',True,'white')
 Start = font.render('Start',True,'white')
 Round_1 = font.render('5 Rounds',True,'white')
@@ -19,6 +24,8 @@ Round_4 = font.render('20 Rounds',True,'white')
 Next = font.render('Next',True,'white')
 Retry = font.render('Retry',True,'white')
 Exit = font.render('Exit',True,'white')
+
+
 
 
 Rock = pygame.image.load('Rock.png')
@@ -41,6 +48,7 @@ Scissors_button = Scissors.get_rect(center=(330,300))
 Next_button = pygame.Rect(173,410,60,30)
 Retry_button=pygame.Rect(70,410,70,30)
 Exit_button = pygame.Rect(260,410,60,30)
+
 
 
 run =True
@@ -97,6 +105,7 @@ def Game():
     if (not still_game_state) and count_round<round:
         pygame.draw.rect(screen,('black'),Next_button)
         screen.blit(Next,(Next_button.x,Next_button.y))
+        Comp_bot()
     
     if Final_state and count_round==round:
         pygame.draw.rect(screen,('black'),Retry_button)
@@ -104,8 +113,22 @@ def Game():
         
         pygame.draw.rect(screen,('black'),Exit_button)
         screen.blit(Exit,(Exit_button.x,Exit_button.y))
+        
 
  
+def Comp_bot():
+     global result
+     if comp_choice==1:screen.blit(Rock,(140,60))
+     elif comp_choice==2:screen.blit(Paper,(140,60)) 
+     elif comp_choice==3:screen.blit(Scissors,(140,60)) 
+     
+     if comp_choice==1 and choice==3 or comp_choice==3 and choice==2 or comp_choice==2 and choice==1:
+         result=-1
+     if choice==1 and comp_choice==3 or choice==3 and comp_choice==2 or choice==2 and comp_choice==1:
+         result=1
+     if choice==comp_choice:
+         result=0
+        
 while run:
     
     screen.fill("red")
@@ -116,6 +139,9 @@ while run:
         Round_menu()
     if Game_state:
         Game()
+        Score=font.render(f"{score_your}",True,'white')
+        screen.blit(Score,(10,10))
+        
         
     for events in pygame.event.get():
         if events.type == pygame.QUIT:
@@ -148,15 +174,18 @@ while run:
                 Rounds_state=False
                 Game_state=True
                 
-            if Rock_button.collidepoint(events.pos):
+            if Rock_button.collidepoint(events.pos) and Game_state==True and still_game_state==True:
                 choice=1
                 still_game_state=False
-            if Paper_button.collidepoint(events.pos):
+                comp_choice= random.randint(1,3)
+            if Paper_button.collidepoint(events.pos) and Game_state==True and still_game_state==True:
                 choice=2
                 still_game_state=False
-            if Scissors_button.collidepoint(events.pos):
+                comp_choice= random.randint(1,3)
+            if Scissors_button.collidepoint(events.pos) and Game_state==True and still_game_state==True:
                 choice=3
                 still_game_state=False
+                comp_choice= random.randint(1,3)
                 
             if Next_button.collidepoint(events.pos):
                if count_round<round:
@@ -164,10 +193,18 @@ while run:
                     still_game_state=True
                if count_round==round:
                    Final_state=True
+              
+               if result==1:score_your+=1
+               if result==-1:score_comp+=1
+                    
+                   
+                
             
             if Retry_button.collidepoint(events.pos) and Final_state==True:
                 count_round=1
                 still_game_state=True
+                score_you=0
+                score_comp=0
             
             if Exit_button.collidepoint(events.pos) and Final_state==True:
                 Game_state=False
@@ -175,7 +212,7 @@ while run:
                 Final_state=False
                 Menu_state=True
                 count_round=1
-
+     
 
     pygame.display.update()
     
