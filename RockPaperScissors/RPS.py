@@ -41,7 +41,7 @@ Paper = pygame.image.load('Paper.png')
 Paper = pygame.transform.scale(Paper,(100,100))
 Scissors = pygame.image.load('Scissors.png')
 Scissors = pygame.transform.scale(Scissors,(100,100))
-Game_icon_ingame = pygame.transform.scale(Game_icon,(200,200))
+Game_icon_ingame = pygame.transform.scale(Game_icon,(300,300))
 
 #all buttons for user interaction
 Quit_button =  pygame.Rect(250,350,68,30)
@@ -76,7 +76,7 @@ def Start_menu():
      Title=font_2.render("ROCK PAPER SCISSORS",True,'white')
      screen.blit(Title,(12,30))
      
-     screen.blit(Game_icon_ingame,(100,100))
+     screen.blit(Game_icon_ingame,(50,50))
 
 def Round_menu():
     
