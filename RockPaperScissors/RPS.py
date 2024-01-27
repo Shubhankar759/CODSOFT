@@ -96,7 +96,11 @@ def Round_menu():
      
      screen.blit(text_1,(20,50))
      
+     
 def Game():
+    
+    instru=font_1.render('''star(*) below shows satuts of player's move''',True,'yellow')
+    screen.blit(instru,(20,470))
     
     pygame.draw.rect(screen,('black'),Rock_button)
     screen.blit(Rock,Rock_button)
@@ -119,6 +123,18 @@ def Game():
         pygame.draw.rect(screen,('black'),Next_button)
         screen.blit(Next,(Next_button.x,Next_button.y))
         Comp_bot()
+        
+        if result==1: mark = font.render('*',True,'green')
+        
+        elif result==-1: mark=font.render('*',True,'red')
+        
+        else: mark=font.render('*',True,'white')
+        
+        if choice==1:x=60
+        elif choice==2:x=195
+        elif choice==3:x=320
+        
+        screen.blit(mark,(x,355))
     
     if Final_state and count_round==round:
         pygame.draw.rect(screen,('black'),Retry_button)
