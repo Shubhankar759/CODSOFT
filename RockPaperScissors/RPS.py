@@ -243,7 +243,9 @@ while run:
                 still_game_state=True
                 Final_state=False
                 Menu_state=True
-                count_round=1
+                count_round=0
+                score_your=0
+                score_comp=0
      
     #updating screen after every single input
     pygame.display.update()
