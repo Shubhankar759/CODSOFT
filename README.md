@@ -1,6 +1,6 @@
 # Codsoft Internship Python programming
 
-Hello, I'm Shubhankar Warkade pursing my virtual internship at [codsoft](https://www.linkedin.com/company/codsoft/) in python programming domain 🐍
+Hello, I'm [Shubhankar Warkade](https://www.linkedin.com/in/shubhankar-warkade-370696286/) pursing my virtual internship at [codsoft](https://www.linkedin.com/company/codsoft/) in python programming domain 🐍
 
 This repository is place where i published my python project coded as Intern List of project are given below
 
